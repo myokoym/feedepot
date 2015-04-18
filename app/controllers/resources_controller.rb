@@ -12,7 +12,18 @@ class ResourcesController < ApplicationController
   end
 
   def show
-    render json: {}
+    id = params[:id]
+    resource = Resource.find_by(id: id)
+
+    unless resource
+      render_error(404, "Not found: <#{id}>")
+    end
+
+    response_body = {
+      "resource" => resource.attributes.compact
+    }
+
+    render json: response_body
   end
 
   def create

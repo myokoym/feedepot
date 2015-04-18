@@ -20,9 +20,21 @@ class ResourcesControllerTest < ActionController::TestCase
     end
   end
 
-  test "should get show" do
-    get :show, id: 1
-    assert_response :success
+  sub_test_case("get show") do
+    test "one resource" do
+      resource = create(:resource)
+      get :show, id: resource.id
+      assert_response :success
+      assert_equal({
+                     "resource" => {
+                       "id" => 1,
+                       "xml_url" => "http://example.com/rss",
+                       "created_at" => "0000-01-01T00:00:00.000Z",
+                       "updated_at" => "0000-01-01T00:00:00.000Z",
+                     },
+                   },
+                   JSON.parse(normalize(response.body)))
+    end
   end
 
   sub_test_case("post create") do
