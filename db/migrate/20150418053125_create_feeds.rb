@@ -1,7 +1,7 @@
 class CreateFeeds < ActiveRecord::Migration
   def change
     create_table :feeds do |t|
-      t.string :link
+      t.string :link, null: false
       t.string :title
       t.text :description
       t.datetime :date
