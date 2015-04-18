@@ -22,16 +22,4 @@ class ResourcesController < ApplicationController
 
     render json: response_body
   end
-
-  private
-  def render_error(status_code, message)
-    response_body = {
-      error: {
-        code: "0001-#{status_code}",
-        message: message,
-        time: Time.now,
-      },
-    }
-    render json: response_body, status: status_code
-  end
 end
