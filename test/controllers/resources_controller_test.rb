@@ -20,31 +20,36 @@ class ResourcesControllerTest < ActionController::TestCase
       @resource["title"] = "Title"
       @resource["html_url"] = nil
       @resource["description"] = nil
-      mock(Resource).parse(@url) { @resource }
     end
 
     test "success" do
+      mock(Resource).parse(@url) { @resource }
       post :create, url: @url
 
       assert_response :success
       assert_equal("application/json", response.content_type)
       assert_equal({
                      "resource" => {
-                       "category"=>nil,
-                       "created"=>nil,
-                       "created_at"=> "0000-01-01T00:00:00.000Z",
-                       "description"=>nil,
-                       "html_url"=>nil,
                        "id" => 555,
-                       "is_breakpoint"=>nil,
-                       "is_comment"=>nil,
-                       "language"=>nil,
-                       "text"=>nil,
-                       "title"=>"Title",
-                       "updated_at"=>"0000-01-01T00:00:00.000Z",
-                       "url"=>nil,
-                       "version"=>nil,
-                       "xml_url"=>"http://example.com/rss",
+                       "xml_url" => "http://example.com/rss",
+                       "title" => "Title",
+                       "created_at" => "0000-01-01T00:00:00.000Z",
+                       "updated_at" => "0000-01-01T00:00:00.000Z",
+                     },
+                   },
+                   JSON.parse(normalize_time(response.body)))
+    end
+
+    test "fail" do
+      post :create, url: "aaa"
+
+      assert_response 400
+      assert_equal("application/json", response.content_type)
+      assert_equal({
+                     "error" => {
+                       "code" => "0001-400",
+                       "message" => "ERROR: Invalid URL <aaa>.",
+                       "time" => "0000-01-01T00:00:00.000Z",
                      },
                    },
                    JSON.parse(normalize_time(response.body)))
