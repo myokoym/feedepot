@@ -9,7 +9,7 @@ class CreateResources < ActiveRecord::Migration
       t.text :description
       t.string :url
       t.string :html_url
-      t.string :xml_url
+      t.string :xml_url, null: false
       t.string :title
       t.string :version
       t.string :language
