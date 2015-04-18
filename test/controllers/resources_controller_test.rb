@@ -48,7 +48,7 @@ class ResourcesControllerTest < ActionController::TestCase
       assert_equal({
                      "error" => {
                        "code" => "0001-400",
-                       "message" => "ERROR: Invalid URL <aaa>.",
+                       "message" => "ERROR: Invalid URL: <aaa>.",
                        "time" => "0000-01-01T00:00:00.000Z",
                      },
                    },

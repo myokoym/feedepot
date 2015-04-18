@@ -11,11 +11,11 @@ class Resource < ActiveRecord::Base
     rescue RSS::InvalidRSSError
       rss = RSS::Parser.parse(url, false)
     rescue
-      raise "WARNING: #{$!} <#{url}>."
+      raise "WARNING: #{$!}: <#{url}>."
     end
 
     unless rss
-      raise "ERROR: Invalid URL <#{url}>."
+      raise "ERROR: Invalid URL: <#{url}>."
     end
 
     resource = {}
