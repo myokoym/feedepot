@@ -6,7 +6,12 @@ class ActiveSupport::TestCase
   include FactoryGirl::Syntax::Methods
 
   startup do
+    DatabaseRewinder.clean_all
     FactoryGirl.reload
+  end
+
+  teardown do
+    DatabaseRewinder.clean
   end
 
   def normalize(response_body)

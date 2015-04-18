@@ -44,5 +44,6 @@ group :development, :test do
 
   gem "test-unit-rails"
   gem "factory_girl_rails"
+  gem "database_rewinder"
 end
 
