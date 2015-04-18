@@ -3,8 +3,9 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'test/unit/rails/test_help'
 
 class ActiveSupport::TestCase
-  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
-  fixtures :all
+  include FactoryGirl::Syntax::Methods
 
-  # Add more helper methods to be used by all tests here...
+  startup do
+    FactoryGirl.reload
+  end
 end

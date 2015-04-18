@@ -29,6 +29,7 @@ module Feedepot
      g.helper false
      g.template_engine false
      g.test_framework :test_unit, view_specs: false, helper_specs: false, fixture: true
+     g.fixture_replacement :factory_girl
    end
   end
 end
