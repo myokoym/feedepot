@@ -40,7 +40,7 @@ class ResourcesControllerTest < ActionController::TestCase
                    JSON.parse(normalize_time(response.body)))
     end
 
-    test "fail" do
+    test "failure" do
       post :create, url: "aaa"
 
       assert_response 400
