@@ -1,9 +1,23 @@
 require 'test_helper'
 
 class ResourcesControllerTest < ActionController::TestCase
-  test "should get index" do
-    get :index
-    assert_response :success
+  sub_test_case("get index") do
+    test "one resource" do
+      create(:resource)
+      get :index
+      assert_response :success
+      assert_equal({
+                     "resources" => [
+                       {
+                         "id" => 1,
+                         "xml_url" => "http://example.com/rss",
+                         "created_at" => "0000-01-01T00:00:00.000Z",
+                         "updated_at" => "0000-01-01T00:00:00.000Z",
+                       },
+                     ],
+                   },
+                   JSON.parse(normalize(response.body)))
+    end
   end
 
   test "should get show" do

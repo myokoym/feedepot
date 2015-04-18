@@ -1,6 +1,14 @@
 class ResourcesController < ApplicationController
   def index
-    render json: {}
+    resources = Resource.all.collect do |resource|
+      resource.attributes.compact
+    end
+
+    response_body = {
+      "resources" => resources
+    }
+
+    render json: response_body
   end
 
   def show
