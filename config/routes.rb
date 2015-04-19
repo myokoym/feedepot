@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   resources :resources, only: [:index, :show, :create]
+  resources :feeds, only: [:index, :show]
+  post "feeds/collect" => "feeds#collect"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
